@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brownie｜GodiVanLife</title>
+
+<style>
+:root {
+    --choco1: #8B4513;
+    --choco2: #D2691E;
+    --cream: #FFF3E0;
+    --ball: #FFCC00;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: 'PingFang TC','Microsoft JhengHei',sans-serif;
+    background: linear-gradient(-45deg,var(--choco1),var(--choco2),#A0522D,var(--choco1));
+    background-size: 400% 400%;
+    animation: bgMove 12s ease infinite;
+    text-align: center;
+}
+
+@keyframes bgMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.container {
+    max-width: 420px;
+    margin: auto;
+    background: var(--cream);
+    padding: 28px;
+    border-radius: 35px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+
+.profile-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 6px solid var(--choco2);
+    object-fit: cover;
+    margin-bottom: 18px;
+    animation: bounce 3s infinite;
+}
+
+@keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+.ball {
+    width: 22px;
+    height: 22px;
+    background: var(--ball);
+    border-radius: 50%;
+    margin: 0 auto 10px auto;
+    animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg) translateX(35px) rotate(0deg); }
+    100% { transform: rotate(360deg) translateX(35px) rotate(-360deg); }
+}
+
+h1 {
+    margin: 10px 0;
+    font-size: 26px;
+    color: var(--choco1);
+}
+
+.tagline {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.info-card {
+    background: #fff8ef;
+    padding: 18px;
+    border-radius: 18px;
+    margin-bottom: 20px;
+    text-align: left;
+    line-height: 1.6;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    margin: 10px 0;
+    border-radius: 25px;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    transition: 0.3s ease;
+}
+
+.btn-call {
+    background: var(--choco1);
+}
+
+.btn-call:hover {
+    background: var(--choco2);
+}
+
+.btn-sms {
+    background: #28a745;
+}
+
+.btn-sms:hover {
+    background: #1e7e34;
+}
+
+.instagram-link {
+    display: block;
+    margin-top: 15px;
+    padding: 12px;
+    background: linear-gradient(45deg,#f09433,#dc2743,#bc1888);
+    color: white;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer {
+    margin-top: 25px;
+    font-size: 11px;
+    color: #eee;
+    letter-spacing: 2px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="ball"></div>
+
+<img src="images/brownie.jpg" alt="Brownie" class="profile-img">
+
+<h1>Brownie 🍫</h1>
+<p class="tagline">GodiVanLife 可愛守護系統</p>
+
+<div class="info-card">
+    🐶 超級可愛<br><br>
+    ⚽ 愛玩球（請拿球吸引我！）
+</div>
+
+<button class="btn btn-sms" onclick="sendSMSLocation()">
+📍 即時定位通報
+</button>
+
+<a href="tel:0966015830" class="btn btn-call">
+📞 撥打主人 1
+</a>
+
+<a href="tel:0966368887" class="btn btn-call">
+📞 撥打主人 2
+</a>
+
+<a href="https://www.instagram.com/brownie_0420_jrt" target="_blank" class="instagram-link">
+看 Brownie 的 IG 📸
+</a>
+
+<footer>
+POWERED BY GODIVANLIFE
+</footer>
+
+</div>
+
+<script>
+function sendSMSLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            const mapUrl = "https://www.google.com/maps?q=" + lat + "," + lng;
+            const message = encodeURIComponent("【尋寵通報】我發現 Brownie！目前位置：" + mapUrl);
+            window.location.href = "sms:0966015830?body=" + message;
+        });
+    } else {
+        window.location.href = "sms:0966015830?body=" + 
+        encodeURIComponent("【尋寵通報】我發現 Brownie，請與我聯繫。");
+    }
+}
+</script>
+
+</body>
+</html>
